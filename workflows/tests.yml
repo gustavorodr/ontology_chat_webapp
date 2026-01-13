@@ -1,0 +1,78 @@
+name: Tests
+
+on:
+  pull_request:
+    branches: [main, staging]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Create .env file from secret
+        run: |
+          echo "${{ secrets.DOTENV }}" > .env
+
+      - name: Install dependencies
+        run: |
+          npm ci
+
+      - name: Build application
+        run: |
+          npm run build
+
+      - name: Install Chrome dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg ca-certificates fonts-liberation libasound2t64 libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libdbus-1-3 libdrm2 libgbm1 libgtk-3-0 libnspr4 libnss3 libwayland-client0 libxcomposite1 libxdamage1 libxfixes3 libxkbcommon0 libxrandr2 xdg-utils
+
+      - name: Start Next.js server
+        run: |
+          set -a
+          [ -f .env ] && . ./.env
+          set +a
+          
+
+          npm run dev:e2e &
+          
+          echo "⏳ Waiting for Next.js server to be ready..."
+          
+          timeout 120 bash -c '
+            counter=1
+            until curl -f http://localhost:3000 2>/dev/null; do 
+              echo "Health check attempt $counter failed, retrying..."
+              counter=$((counter + 1))
+              sleep 2
+            done
+          '
+          echo "✅ Next.js server is ready!"
+
+      - name: Run E2E tests
+        run: |
+          set -a
+          [ -f .env ] && . ./.env
+          set +a
+          
+          npm run test:selenium
+
+      - name: Show server logs on failure
+        if: failure()
+        run: |
+          echo "=== Next.js Server Logs ==="
+          cat .next/trace || echo "No trace file found"
+          ps aux | grep node
+
+      - name: Cleanup
+        if: always()
+        run: |
+          pkill -f "next dev" || true
+          pkill -f "node" || true

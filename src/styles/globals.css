@@ -1,0 +1,363 @@
+/* Global base styles without Tailwind (pure CSS) */
+
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top left, #e0f2fe 0, #f1f5f9 45%, #f9fafb 100%);
+  color: #0f172a;
+}
+
+/* ====================
+   Bug selection screen
+   ==================== */
+
+.verification-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+}
+
+.verification-card {
+  width: 100%;
+  max-width: 720px;
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+  padding: 2.5rem 2.25rem;
+  box-sizing: border-box;
+}
+
+.verification-title {
+  font-size: 1.9rem;
+  line-height: 2.2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: #020617;
+}
+
+.verification-subtitle {
+  margin: 0 0 2rem;
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+.verification-empty-state {
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  border-radius: 0.75rem;
+  background: #f8fafc;
+  border: 1px dashed #cbd5f5;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.verification-actions {
+  margin-top: 1.75rem;
+}
+
+.btn-primary {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.5rem;
+  border-radius: 0.65rem;
+  border: none;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  box-shadow: 0 14px 30px rgba(30, 64, 175, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 8px 18px rgba(30, 64, 175, 0.35);
+}
+
+.btn-primary:disabled {
+  cursor: not-allowed;
+  background: #94a3b8;
+  box-shadow: none;
+}
+
+.bugs-list {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.bug-card {
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  padding: 0.9rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.bug-card:hover {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  box-shadow: 0 8px 18px rgba(59, 130, 246, 0.12);
+}
+
+.bug-card-selected {
+  border-color: #2563eb;
+  background: #eff6ff;
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.18);
+}
+
+.bug-card-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin: 0 0 0.15rem;
+  color: #0f172a;
+}
+
+.bug-card-description {
+  margin: 0.1rem 0 0.25rem;
+  font-size: 0.88rem;
+  color: #64748b;
+}
+
+.bug-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+}
+
+.bug-severity-pill {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.bug-completed-date {
+  color: #64748b;
+}
+
+.bug-radio {
+  margin-left: 0.5rem;
+}
+
+/* ====================
+   Session layout (multichat)
+   ==================== */
+
+.app-shell {
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+}
+
+.app-container {
+  max-width: 1220px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.app-header-title {
+  font-size: 2rem;
+  margin: 0 0 0.4rem;
+  font-weight: 700;
+  color: #020617;
+}
+
+.app-header-subtitle {
+  margin: 0;
+  font-size: 0.96rem;
+  color: #64748b;
+}
+
+.app-main-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.8rem;
+}
+
+.chat-column,
+.summary-column {
+  min-height: 0;
+}
+
+.chat-column-header-title {
+  margin: 0 0 0.2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.chat-column-header-subtitle {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.multi-chat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.1rem;
+}
+
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 0.9rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+  height: 360px; /* altura fixa; conteúdo interno rola */
+}
+
+.chat-window-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f9fafb;
+}
+
+.chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.chat-employee-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #020617;
+}
+
+.chat-employee-role {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.chat-message-bubble {
+  max-width: 80%;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.chat-message-bubble-alia {
+  background: #3B82F6;
+  color: #111827;
+}
+
+.chat-message-bubble-employee {
+  background: #e5e7eb; /* cinza para mensagens do usuário */
+  color: #111827;
+}
+
+.chat-message-timestamp {
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.chat-input-area {
+  padding: 0.85rem 1rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.55rem;
+  border: 1px solid #d1d5db;
+  font-size: 0.9rem;
+}
+
+.chat-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px #2563eb33;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.status-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+}
+
+.progress-summary-card {
+  background: #ffffff;
+  border-radius: 0.9rem;
+  border: 1px solid #e2e8f0;
+  padding: 1.5rem;
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.12);
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .app-main-grid {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .verification-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .verification-title {
+    font-size: 1.5rem;
+  }
+}
+

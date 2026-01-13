@@ -1,0 +1,9 @@
+services:
+  mock:
+    image: mockserver/mockserver:5.11.1
+    container_name: webapp_mock_server
+    command: -logLevel ERROR -serverPort 1081 -proxyRemotePort 1081
+    environment:
+      - JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8
+    ports:
+      - '1081:1081'

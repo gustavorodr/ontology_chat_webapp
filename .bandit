@@ -1,0 +1,29 @@
+# Configuração do Bandit para análise de segurança Python
+# Arquivo: .bandit
+
+[bandit]
+# Arquivos e diretórios a serem excluídos da análise
+exclude_dirs = [
+    "tests",
+    "test", 
+    "venv",
+    "env",
+    ".venv",
+    "__pycache__",
+    "migrations",
+    "alembic"
+]
+
+# Testes a serem ignorados (use com cuidado)
+skips = [
+    # B101: assert_used - útil em desenvolvimento
+    "B101"
+]
+
+# Nível de confiança mínimo para reportar issues
+# HIGH, MEDIUM, LOW
+confidence = "MEDIUM"
+
+# Severidade mínima para reportar issues  
+# HIGH, MEDIUM, LOW
+severity = "LOW"
